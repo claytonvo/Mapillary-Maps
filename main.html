@@ -1,26 +1,27 @@
 <html>
-    <head>Mapillary Map
+    <head>
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+        <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="style.css">
         <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
         <script src="object--bench.geojson"></script>
         <script src="osmBenches.geojson"></script>
-        <style>
-            #map{ height: 80% }
-        </style>
     </head>
 
     <body>
+
+        <center><h1>Mapillary Maps</h1></center>
         <div id="map"></div>
 
         <script>
       
             // initialize the map
-            var map = L.map('map').setView([45.525665, -122.682219], 15);
+            var map = L.map('map').setView([45.525665, -122.682219], 14);
 
             // styling for points
             var geojsonMarkerOptions = {
                 radius: 6,
-                fillColor: "#ff7800",
+                fillColor: "#0DCB68",
                 color: "#000",
                 weight: 1,
                 opacity: 1,
@@ -51,9 +52,10 @@
 
         </script>
 
-        <button onclick="addLayer(mapillaryBenchLayer)">Mapillary Benches</button>
-        <button onclick="addLayer(osmBenchLayer)">OSM Benches</button>
-        <button onclick="removeLayers()">Remove All</button>
-
+        <div id="buttons">
+            <button onclick="addLayer(mapillaryBenchLayer)">Mapillary Benches</button>
+            <button onclick="addLayer(osmBenchLayer)">OSM Benches</button>
+            <button onclick="removeLayers()">Remove All</button>
+        </div>
     </body>
 </html>
