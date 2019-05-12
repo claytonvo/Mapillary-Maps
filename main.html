@@ -6,6 +6,7 @@
         <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
         <script src="object--bench.geojson"></script>
         <script src="osmBenches.geojson"></script>
+        <script src="osmBenchesResult.geojson"></script>
     </head>
 
     <body>
@@ -37,6 +38,7 @@
             // point layers here
             var mapillaryBenchLayer = L.geoJSON(mapillaryBenches,{pointToLayer: function (feature, latlng) {return L.circleMarker(latlng, geojsonMarkerOptions);}})
             var osmBenchLayer = L.geoJSON(osmBenches,{pointToLayer: function (feature, latlng) {return L.circleMarker(latlng, geojsonMarkerOptions);}})
+            var osmBenchResultLayer = L.geoJSON(osmBenchesResult,{pointToLayer: function (feature, latlng) {return L.circleMarker(latlng, geojsonMarkerOptions);}})
             
             // adds layer to the map view
             function addLayer(layer) {
@@ -48,13 +50,15 @@
             function removeLayers() {
                 map.removeLayer(mapillaryBenchLayer);
                 map.removeLayer(osmBenchLayer);
+                map.removeLayer(osmBenchResultLayer);
             }
 
         </script>
 
         <div id="buttons">
-            <button onclick="addLayer(mapillaryBenchLayer)">Mapillary Benches</button>
             <button onclick="addLayer(osmBenchLayer)">OSM Benches</button>
+            <button onclick="addLayer(mapillaryBenchLayer)">Mapillary Benches</button>
+            <button onclick="addLayer(osmBenchResultLayer)">OSM Benches + Mapillary</button>
             <button onclick="removeLayers()">Remove All</button>
         </div>
     </body>
