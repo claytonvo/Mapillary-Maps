@@ -1,0 +1,59 @@
+<html>
+    <head>Mapillary Map
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+        <script src="object--bench.geojson"></script>
+        <script src="osmBenches.geojson"></script>
+        <style>
+            #map{ height: 80% }
+        </style>
+    </head>
+
+    <body>
+        <div id="map"></div>
+
+        <script>
+      
+            // initialize the map
+            var map = L.map('map').setView([45.525665, -122.682219], 15);
+
+            // styling for points
+            var geojsonMarkerOptions = {
+                radius: 6,
+                fillColor: "#ff7800",
+                color: "#000",
+                weight: 1,
+                opacity: 1,
+                fillOpacity: 0.8
+            };
+        
+            // load a tile layer (basemap)
+            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+            {
+                attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+            }).addTo(map);
+        
+            // point layers here
+            var mapillaryBenchLayer = L.geoJSON(mapillaryBenches,{pointToLayer: function (feature, latlng) {return L.circleMarker(latlng, geojsonMarkerOptions);}})
+            var osmBenchLayer = L.geoJSON(osmBenches,{pointToLayer: function (feature, latlng) {return L.circleMarker(latlng, geojsonMarkerOptions);}})
+            
+            // adds layer to the map view
+            function addLayer(layer) {
+                removeLayers();
+                layer.addTo(map);
+            }
+
+            // removes all layers being shown on the map
+            function removeLayers() {
+                map.removeLayer(mapillaryBenchLayer);
+                map.removeLayer(osmBenchLayer);
+            }
+
+        </script>
+
+        <button onclick="addLayer(mapillaryBenchLayer)">Mapillary Benches</button>
+        <button onclick="addLayer(osmBenchLayer)">OSM Benches</button>
+        <button onclick="removeLayers()">Remove All</button>
+
+    </body>
+</html>
