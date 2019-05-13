@@ -92,6 +92,17 @@ button {
     float:left;
   }
 
+#circle2  {
+    width: 14px;
+    height: 14px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius:7px;
+    border-radius: 7px;
+    background: #e8410d;
+    float:left;
+  }
+
+
 
 .legend {
     line-height: 18px;

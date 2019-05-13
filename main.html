@@ -40,41 +40,120 @@
             var osmBenchLayer = L.geoJSON(osmBenches,{pointToLayer: function (feature, latlng) {return L.circleMarker(latlng, geojsonMarkerOptions);}})
             var osmBenchResultLayer = L.geoJSON(osmBenchesResult,{pointToLayer: function (feature, latlng) {return L.circleMarker(latlng, geojsonMarkerOptions);}})
             
+            var mapillaryFilterVisible = L.geoJSON(mapillaryBenches,{pointToLayer: function (feature, latlng)
+                {return L.circleMarker(latlng, styleMapillary(feature.properties.verification_Status));}})
+            
+            var mapillaryFilterAdded = L.geoJSON(mapillaryBenches,{pointToLayer: function (feature, latlng)
+                {return L.circleMarker(latlng, styleMapillary(feature.properties.verification_Action));}})
+
+            // code for changing legend
+            map.on('baselayerchange', function(eventLayer) {
+                if (eventLayer.name == 'Visible/Not Visible') { 
+                    map.removeControl(legend);
+                    legend = createLegend('visible');
+                    addLegend(legend);
+                } else if (eventLayer.name == 'Added/Not Added') {
+                    map.removeControl(legend);
+                    legend = createLegend('added');
+                    addLegend(legend);
+                } else {
+                    map.removeControl(legend);
+                    legend = createLegend();
+                    addLegend(legend);
+                }
+            });
+           
+            var legend = createLegend();
+            var control = L.control.layers(maps);
+
             // adds layer to the map view
-            function addLayer(layer) {
+            function addLayer(layer,type) {
                 removeLayers();
                 layer.addTo(map);
+                legend = createLegend(type);
+                addLegend(legend);
+                if (type == 'mapillary') {
+                    control = L.control.layers(maps).addTo(map);
+                }
             }
+
+            function addMapillaryLayer() {
+                removeLayers();
+                mapillaryBenchLayer.addTo(map);
+            }
+
+            //filters mapillary layers
+            function filter(d) {
+                if (d.match(/Not Visible.*/) || (d.match(/Not Added.*/))) {
+                    return '#e8410d';
+                } else {
+                    return '#0DCB68';
+                }
+            }
+
+            function styleMapillary(f) {
+               return { 
+                    radius: 6,
+                    fillColor: filter(f),
+                    color: "#000",
+                    weight: 1,
+                    opacity: 1,
+                    fillOpacity: 0.8
+               }
+            }
+
 
             // removes all layers being shown on the map
             function removeLayers() {
+                map.removeControl(control);
+                map.removeControl(legend);
                 map.removeLayer(mapillaryBenchLayer);
                 map.removeLayer(osmBenchLayer);
                 map.removeLayer(osmBenchResultLayer);
+                map.removeLayer(mapillaryFilterVisible);
+                map.removeLayer(mapillaryFilterAdded);
             }
 
-            // leaflet
-            var legend = L.control({position: 'bottomright'});
-            legend.onAdd = function (map) {
+            // Create legend
+            function createLegend(type) {
+                var legend = L.control({position: 'bottomright'});
+                legend.onAdd = function (map) {
+                    var div = L.DomUtil.create('div', 'legend');
+                    if (type == 'visible') {
+                        div.innerHTML = '<div id ="circle"></div> &nbspVisible <br> <div id ="circle2"></div> &nbspNot Visible'
+                    } else if (type == 'added'){
+                        div.innerHTML = '<div id ="circle"></div> &nbspAdded <br> <div id ="circle2"></div> &nbspNot Added'
+                    } else {
+                        div.innerHTML =  '<div id ="circle"></div>&nbspBench'
+                    }
+                    return div;
+                };
+                return legend;
+            }
 
-            var div = L.DomUtil.create('div', 'legend');
-
-            div.innerHTML =  '<div id ="circle"></div>&nbspBench'
-        
-
-            return div;
+            function addLegend(l) {
+                map.removeControl(legend);
+                map.removeControl(l);
+                l.addTo(map);
+            }
+            
+            
+            // control
+            var maps = {
+                "All Points": mapillaryBenchLayer,
+                "Visible/Not Visible":  mapillaryFilterVisible,
+                "Added/Not Added": mapillaryFilterAdded
+                
             };
 
-            legend.addTo(map);
+
 
         </script>
 
         <div id="buttons">
             <button onclick="addLayer(osmBenchLayer)">OSM Benches</button>
-            <button onclick="addLayer(mapillaryBenchLayer)">Mapillary Benches</button>
+            <button onclick="addLayer(mapillaryBenchLayer,'mapillary')">Mapillary Benches</button>
             <button onclick="addLayer(osmBenchResultLayer)">OSM Benches + Mapillary</button>
-            <button onclick="removeLayers()">Remove All</button>
-            
         </div>
 
 
