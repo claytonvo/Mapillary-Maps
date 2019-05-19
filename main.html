@@ -7,6 +7,9 @@
         <script src="object--bench.geojson"></script>
         <script src="osmBenches.geojson"></script>
         <script src="osmBenchesResult.geojson"></script>
+        <script src="BikeVerification.geojson"></script>
+        <script src="OSMBikesClip2.geojson"></script>
+        <script src="OSMBikesResult.geojson"></script>
     </head>
 
     <body>
@@ -39,6 +42,10 @@
             var mapillaryBenchLayer = L.geoJSON(mapillaryBenches,{pointToLayer: function (feature, latlng) {return L.circleMarker(latlng, geojsonMarkerOptions);}})
             var osmBenchLayer = L.geoJSON(osmBenches,{pointToLayer: function (feature, latlng) {return L.circleMarker(latlng, geojsonMarkerOptions);}})
             var osmBenchResultLayer = L.geoJSON(osmBenchesResult,{pointToLayer: function (feature, latlng) {return L.circleMarker(latlng, geojsonMarkerOptions);}})
+
+            var mapillaryBikeLayer =  L.geoJSON(bikeVerification,{pointToLayer: function (feature, latlng) {return L.circleMarker(latlng, geojsonMarkerOptions);}})
+            var osmBikeLayer = L.geoJSON(osmBikes,{pointToLayer: function (feature, latlng) {return L.circleMarker(latlng, geojsonMarkerOptions);}})
+            var osmBikeResultLayer = L.geoJSON(OSMBikesResult,{pointToLayer: function (feature, latlng) {return L.circleMarker(latlng, geojsonMarkerOptions);}})
             
             var mapillaryFilterVisible = L.geoJSON(mapillaryBenches,{pointToLayer: function (feature, latlng)
                 {return L.circleMarker(latlng, styleMapillary(feature.properties.verification_Status));}})
@@ -112,6 +119,9 @@
                 map.removeLayer(osmBenchResultLayer);
                 map.removeLayer(mapillaryFilterVisible);
                 map.removeLayer(mapillaryFilterAdded);
+                map.removeLayer(osmBikeLayer);
+                map.removeLayer(osmBikeResultLayer);
+                map.removeLayer(mapillaryBikeLayer);
             }
 
             // Create legend
@@ -154,6 +164,12 @@
             <button onclick="addLayer(osmBenchLayer)">OSM Benches</button>
             <button onclick="addLayer(mapillaryBenchLayer,'mapillary')">Mapillary Benches</button>
             <button onclick="addLayer(osmBenchResultLayer)">OSM Benches + Mapillary</button>
+        </div>
+
+        <div id="buttons">
+            <button onclick="addLayer(osmBikeLayer)">OSM Bikes</button>
+            <button onclick="addLayer(mapillaryBikeLayer,'mapillary')">Mapillary Bikes</button>
+            <button onclick="addLayer(osmBikeResultLayer)">OSM Bikes + Mapillary</button>
         </div>
 
 
