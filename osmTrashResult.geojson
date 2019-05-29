@@ -1,4 +1,4 @@
-var osmTrashVerification = 
+var osmTrashResult = 
 {
 "type": "FeatureCollection",
 "name": "osmTrashClip",

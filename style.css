@@ -2,14 +2,48 @@
     font-family:'Source Sans Pro', sans-serif
 }
 
+html, body { height: 100% }
+
 #map { 
     height: 60%;
     width: 40%; 
     margin: auto; 
 }
 
-#buttons {
-    text-align: center; padding: 25px;
+#mainbuttons {
+    text-align: center; 
+}
+
+.mainbutton {
+    font-size: 12px;
+    font-weight: 100;
+    margin-top: 10px;
+    width: 120px;
+    height: 10px;
+    background-color: #333;
+}
+
+#benches {
+    text-align: center; 
+    padding: 25px;
+}
+
+#bikes {
+    text-align: center; 
+    padding: 25px;
+    display: none;
+}
+
+#fire {
+    text-align: center; 
+    padding: 25px;
+    display: none;
+}
+
+#waste {
+    text-align: center; 
+    padding: 25px;
+    display: none;
 }
 
 h1 {
