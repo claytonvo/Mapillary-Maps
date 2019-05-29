@@ -4,14 +4,14 @@
 
 html, body { height: 100% }
 
-#map { 
-    height: 80%;
-    width: 50%; 
-    margin: auto; 
+#map {
+    height: 70%;
+    width: 50%;
+    margin: auto;
 }
 
 #mainbuttons {
-    text-align: center; 
+    text-align: center;
 }
 
 .mainbutton {
@@ -19,29 +19,29 @@ html, body { height: 100% }
     font-weight: 100;
     margin-top: 10px;
     width: 120px;
-    height: 10px;
+    height: 30px;
     background-color: #333;
 }
 
 #benches {
-    text-align: center; 
+    text-align: center;
     padding: 25px;
 }
 
 #bikes {
-    text-align: center; 
+    text-align: center;
     padding: 25px;
     display: none;
 }
 
 #fire {
-    text-align: center; 
+    text-align: center;
     padding: 25px;
     display: none;
 }
 
 #waste {
-    text-align: center; 
+    text-align: center;
     padding: 25px;
     display: none;
 }
