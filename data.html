@@ -26,6 +26,7 @@
         <canvas id="visiblechart" height="300" width="400"></canvas>
         <canvas id="existchart"height="300" width="400"></canvas>
         <canvas id="addedchart" height="300" width="400"></canvas>
+        <canvas id="duplicatechart" height="300" width="400"></canvas>
         </div>
 
         <div id = "flex">
@@ -98,6 +99,25 @@
                 }
             });
 
+            // Duplicates
+            var duplicateChart = new Chart(document.getElementById("duplicatechart"), {
+                type: 'pie',
+                data: {
+                labels: ["Yes", "No", "N/A"],
+                datasets: [{
+                    label: "Bench Duplicates",
+                    backgroundColor: ["#6ba975", "#de425b", "#808080"],
+                    data: [47, 199, 421]
+                }]
+                },
+                options: {
+                    responsive: false,
+                title: {
+                    display: true,
+                    text: 'Cumulative Additions to OSM'
+                }
+                }
+            });
 
             var offsetChart = new Chart(document.getElementById("barchart"), {
                 type: 'bar',
@@ -261,6 +281,38 @@
 
     </script>
 
+<script>
+    $("#benchbutton").on("click", function() {
+        duplicateChart.options.title.text = 'Bench Duplicates';
+        duplicateChart.data.datasets[0].data = [47, 199, 421];
+        duplicateChart.update();
+    });
 
+    $("#bikebutton").on("click", function() {
+        duplicateChart.options.title.text = 'Bike Rack Duplicates';
+        duplicateChart.data.datasets[0].data = [18, 223, 52];
+        duplicateChart.update();
+    });
+
+    $("#firebutton").on("click", function() {
+        duplicateChart.options.title.text = 'Fire Hydrant Duplicates';
+        duplicateChart.data.datasets[0].data = [102, 308, 90];
+        duplicateChart.update();
+    });
+
+    $("#wastebutton").on("click", function() {
+        duplicateChart.options.title.text = 'Wastebasket Duplicates';
+        duplicateChart.data.datasets[0].data = [28, 70,201];
+        duplicateChart.update();
+    });
+
+    $("#cumulativebutton").on("click", function() {
+        duplicateChart.options.title.text = 'Cumulative Duplicates';
+        duplicateChart.data.datasets[0].data = [195, 800, 764];
+        duplicateChart.update();
+    });
+
+
+</script>
     </body>
 </html>
