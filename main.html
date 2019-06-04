@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
         <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="style.css">
@@ -19,11 +20,17 @@
         <script src="osmTrashResult.geojson"></script>
         <script src="osmTrash.geojson"></script>
         <script src="trashVerification.geojson"></script>
+        <script src="https://kit.fontawesome.com/ec90fb9154.js"></script>
     </head>
 
     <body>
 
-        <center><h1><a href="https://docs.google.com/document/d/1D99aW5iM5kR05FL7eRvAhtwRiq1D_QNRE3tYvM-UJxg/edit?usp=sharing">Verifying Mapillary Point Features</a></h1></center>
+        <div class="navbar">
+                <a class="active" href="main.html"><i class="fa fa-fw fa-map"></i> Maps</a>
+                <a href="data.html"><i class="fas fa-chart-pie"></i> Data Visualizations</a>
+        </div>
+
+        <center><h1><a href="https://docs.google.com/document/d/1D99aW5iM5kR05FL7eRvAhtwRiq1D_QNRE3tYvM-UJxg/edit?usp=sharing">Feature Class Maps</a></h1></center>
         <div id="map"></div>
 
         <script>
@@ -250,152 +257,6 @@
             <button onclick="addLayer(mapillaryWasteLayer,'mapillarywaste')">Mapillary Wastebaskets</button>
             <button onclick="addLayer(osmWasteResultLayer)">OSM Waste + Mapillary</button>
         </div>
-
-        <div id = "center">
-        <div id = "flex">
-        <canvas id="visiblechart" height="400" width="400"></canvas>
-        <canvas id="existchart"height="400" width="400"></canvas>
-        <canvas id="bar-chart" height="400" width="400"></canvas>
-        </div>
-        </div>
-
-
-
-        
-        <script>
-        // Bar chart here
-            var visibleChart = new Chart(document.getElementById("visiblechart"), {
-                type: 'pie',
-                data: {
-                labels: ["Visible", "Non-Visible"],
-                datasets: [{
-                    label: "Bench Visibility",
-                    backgroundColor: ["#6ba975", "#de425b"],
-                    data: [288,460]
-                }]
-                },
-                options: {
-                    responsive: false,
-                title: {
-                    display: true,
-                    text: 'Bench Visibility'
-                }
-                }
-            });
-
-
-            $("#benchbutton").on("click", function() {
-                visibleChart.options.title.text = 'Bench Visibility';
-                visibleChart.data.datasets[0].data = [288,460];
-                visibleChart.update();
-            });
-
-            $("#bikebutton").on("click", function() {
-                visibleChart.options.title.text = 'Bike Rack Visibility';
-                visibleChart.data.datasets[0].data = [241,60];
-                visibleChart.update();
-            });
-
-            $("#firebutton").on("click", function() {
-                visibleChart.options.title.text = 'Fire Hydrant Visibility';
-                visibleChart.data.datasets[0].data = [400,92];
-                visibleChart.update();
-            });
-
-            $("#wastebutton").on("click", function() {
-                visibleChart.options.title.text = 'Wastebasket Visibility';
-                visibleChart.data.datasets[0].data = [85,214];
-                visibleChart.update();
-            });
-
-            var existChart = new Chart(document.getElementById("existchart"), {
-                type: 'pie',
-                data: {
-                labels: ["Not in OSM", "Already in OSM"],
-                datasets: [{
-                    label: "Bench Visibility",
-                    backgroundColor: ["#6ba975", "#de425b"],
-                    data: [158,79]
-                }]
-                },
-                options: {
-                    responsive: false,
-                title: {
-                    display: true,
-                    text: 'Bench OSM Status'
-                }
-                }
-            });
-
-            $("#benchbutton").on("click", function() {
-                existChart.options.title.text = 'Bench OSM Status';
-                existChart.data.datasets[0].data = [158,79];
-                existChart.update();
-            });
-
-            $("#bikebutton").on("click", function() {
-                existChart.options.title.text = 'Bike Rack OSM Status';
-                existChart.data.datasets[0].data = [83,149];
-                existChart.update();
-            });
-
-            $("#firebutton").on("click", function() {
-                existChart.options.title.text = 'Fire Hydrant OSM Status';
-                existChart.data.datasets[0].data = [94,316];
-                existChart.update();
-            });
-
-            $("#wastebutton").on("click", function() {
-                existChart.options.title.text = 'Wastebasket OSM Status';
-                existChart.data.datasets[0].data = [31,56];
-                existChart.update();
-            });
-
-
-            var addedChart = new Chart(document.getElementById("bar-chart"), {
-                type: 'pie',
-                data: {
-                labels: ["Added", "Not Added"],
-                datasets: [{
-                    label: "Bench Visibility",
-                    backgroundColor: ["#6ba975", "#de425b"],
-                    data: [141,597]
-                }]
-                },
-                options: {
-                    responsive: false,
-                title: {
-                    display: true,
-                    text: 'Bench Additions to OSM'
-                }
-                }
-            });
-
-            $("#benchbutton").on("click", function() {
-                addedChart.options.title.text = 'Bench Additions to OSM';
-                addedChart.data.datasets[0].data = [141,597];
-                addedChart.update();
-            });
-
-            $("#bikebutton").on("click", function() {
-                addedChart.options.title.text = 'Bike Rack Additions to OSM';
-                addedChart.data.datasets[0].data = [78,215];
-                addedChart.update();
-            });
-
-            $("#firebutton").on("click", function() {
-                addedChart.options.title.text = 'Fire Hydrant Additions to OSM';
-                addedChart.data.datasets[0].data = [105,395];
-                addedChart.update();
-            });
-
-            $("#wastebutton").on("click", function() {
-                addedChart.options.title.text = 'Wastebasket Additions to OSM';
-                addedChart.data.datasets[0].data = [19,280];
-                addedChart.update();
-            });
-
-        </script>
 
 
     </body>

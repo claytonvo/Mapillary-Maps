@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+        <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://kit.fontawesome.com/ec90fb9154.js"></script>
+    </head>
+
+    <body>
+
+        <div class="navbar">
+                <a href="main.html"><i class="fa fa-fw fa-map"></i> Maps</a>
+                <a class="active"  href="#"><i class="fas fa-chart-pie"></i> Data Visualizations</a>
+        </div>
+        
+
+        <br>
+
+ 
+        <div id = "flex">
+        <canvas id="visiblechart" height="300" width="400"></canvas>
+        <canvas id="existchart"height="300" width="400"></canvas>
+        <canvas id="addedchart" height="300" width="400"></canvas>
+        </div>
+
+        <div id = "flex">
+        <canvas id="barchart" height="300" width="500"></canvas>
+        </div>
+    
+        
+        <script>
+        // Bar chart here
+            var visibleChart = new Chart(document.getElementById("visiblechart"), {
+                type: 'pie',
+                data: {
+                labels: ["Visible", "Non-Visible"],
+                datasets: [{
+                    label: "Bench Visibility",
+                    backgroundColor: ["#6ba975", "#de425b"],
+                    data: [288,460]
+                }]
+                },
+                options: {
+                    responsive: false,
+                title: {
+                    display: true,
+                    text: 'Cumulative Visibility'
+                }
+                }
+            });
+
+
+
+
+            var existChart = new Chart(document.getElementById("existchart"), {
+                type: 'pie',
+                data: {
+                labels: ["Not in OSM", "Already in OSM"],
+                datasets: [{
+                    label: "Bench Visibility",
+                    backgroundColor: ["#6ba975", "#de425b"],
+                    data: [158,79]
+                }]
+                },
+                options: {
+                    responsive: false,
+                title: {
+                    display: true,
+                    text: 'Cumulative OSM Status'
+                }
+                }
+            });
+
+
+
+
+            var addedChart = new Chart(document.getElementById("addedchart"), {
+                type: 'pie',
+                data: {
+                labels: ["Added", "Not Added"],
+                datasets: [{
+                    label: "Bench Visibility",
+                    backgroundColor: ["#6ba975", "#de425b"],
+                    data: [141,597]
+                }]
+                },
+                options: {
+                    responsive: false,
+                title: {
+                    display: true,
+                    text: 'Cumulative Additions to OSM'
+                }
+                }
+            });
+
+
+            var offsetChart = new Chart(document.getElementById("barchart"), {
+                type: 'bar',
+                data: {
+                labels: ["None", "Low","Medium","High"],
+                datasets: [{
+                    label: "# of Offset Points",
+                    backgroundColor: ["#6ba975","#6ba975","#6ba975","#6ba975"],
+                    data: [197,545,149,46]
+                }]
+                },
+                options: {
+                    legend: { display: false },
+                    responsive: false,
+                title: {
+                    display: true,
+                    text: 'Cumulative Offset Distribution'
+                }
+                }
+            });
+
+        </script>
+
+    <div id="mainbuttons">
+        <button id = "cumulativebutton" class = "mainbutton">Cumulative</button> 
+        <button id = "benchbutton" class = "mainbutton">Benches</button>
+        <button id = "bikebutton" class = "mainbutton" >Bicycle Racks</button>
+        <button id = "firebutton" class = "mainbutton" >Fire Hydrants</button>
+        <button id = "wastebutton" class = "mainbutton" >Wastebaskets</button>
+    </div>
+
+    <script>
+        $("#benchbutton").on("click", function() {
+            visibleChart.options.title.text = 'Bench Visibility';
+            visibleChart.data.datasets[0].data = [288,460];
+            visibleChart.update();
+        });
+
+        $("#bikebutton").on("click", function() {
+            visibleChart.options.title.text = 'Bike Rack Visibility';
+            visibleChart.data.datasets[0].data = [241,60];
+            visibleChart.update();
+        });
+
+        $("#firebutton").on("click", function() {
+            visibleChart.options.title.text = 'Fire Hydrant Visibility';
+            visibleChart.data.datasets[0].data = [400,92];
+            visibleChart.update();
+        });
+
+        $("#wastebutton").on("click", function() {
+            visibleChart.options.title.text = 'Wastebasket Visibility';
+            visibleChart.data.datasets[0].data = [85,214];
+            visibleChart.update();
+        });
+
+        $("#cumulativebutton").on("click", function() {
+            existChart.options.title.text = 'Cumulative Visibility';
+            existChart.data.datasets[0].data = [197,545];
+            existChart.update();
+        });
+
+    </script>
+
+    <script>
+        $("#benchbutton").on("click", function() {
+            existChart.options.title.text = 'Bench OSM Status';
+            existChart.data.datasets[0].data = [158,79];
+            existChart.update();
+        });
+
+        $("#bikebutton").on("click", function() {
+            existChart.options.title.text = 'Bike Rack OSM Status';
+            existChart.data.datasets[0].data = [83,149];
+            existChart.update();
+        });
+
+        $("#firebutton").on("click", function() {
+            existChart.options.title.text = 'Fire Hydrant OSM Status';
+            existChart.data.datasets[0].data = [94,316];
+            existChart.update();
+        });
+
+        $("#wastebutton").on("click", function() {
+            existChart.options.title.text = 'Wastebasket OSM Status';
+            existChart.data.datasets[0].data = [31,56];
+            existChart.update();
+        });
+
+        $("#cumulativebutton").on("click", function() {
+            existChart.options.title.text = 'Cumulative OSM Status';
+            existChart.data.datasets[0].data = [197,545];
+            existChart.update();
+        });
+    </script>
+
+    <script>
+        $("#benchbutton").on("click", function() {
+            addedChart.options.title.text = 'Bench Additions to OSM';
+            addedChart.data.datasets[0].data = [141,597];
+            addedChart.update();
+        });
+
+        $("#bikebutton").on("click", function() {
+            addedChart.options.title.text = 'Bike Rack Additions to OSM';
+            addedChart.data.datasets[0].data = [78,215];
+            addedChart.update();
+        });
+
+        $("#firebutton").on("click", function() {
+            addedChart.options.title.text = 'Fire Hydrant Additions to OSM';
+            addedChart.data.datasets[0].data = [105,395];
+            addedChart.update();
+        });
+
+        $("#wastebutton").on("click", function() {
+            addedChart.options.title.text = 'Wastebasket Additions to OSM';
+            addedChart.data.datasets[0].data = [19,280];
+            addedChart.update();
+        });
+
+        $("#cumulativebutton").on("click", function() {
+            addedChart.options.title.text = 'Cumulative Additions to OSM';
+            addedChart.data.datasets[0].data = [197,545];
+            addedChart.update();
+        });
+
+    </script>
+
+<script>
+        $("#benchbutton").on("click", function() {
+            offsetChart.options.title.text = 'Bench Offset Distribution';
+            offsetChart.data.datasets[0].data = [53,114,50,24];
+            offsetChart.update();
+        });
+
+        $("#bikebutton").on("click", function() {
+            offsetChart.options.title.text = 'Bike Rack Offset Distribution';
+            offsetChart.data.datasets[0].data = [23,153,39,7];
+            offsetChart.update();
+        });
+
+        $("#firebutton").on("click", function() {
+            offsetChart.options.title.text = 'Fire Hydrant Offset Distribution';
+            offsetChart.data.datasets[0].data = [114,228,42,9];
+            offsetChart.update();
+        });
+
+        $("#wastebutton").on("click", function() {
+            offsetChart.options.title.text = 'Wastebasket Offset Distribution';
+            offsetChart.data.datasets[0].data = [7,50,18,6];
+            offsetChart.update();
+        });
+
+        $("#cumulativebutton").on("click", function() {
+            offsetChart.options.title.text = 'Cumulative Offset Distribution';
+            offsetChart.data.datasets[0].data = [197,545,149,46];
+            offsetChart.update();
+        });
+
+
+    </script>
+
+
+    </body>
+</html>
