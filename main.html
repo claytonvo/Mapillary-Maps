@@ -35,7 +35,7 @@
         <div id="map"></div>
 
         <script>
-      
+
             // initialize the map
             var map = L.map('map').setView([45.525665, -122.682219], 14);
 
@@ -48,43 +48,68 @@
                 opacity: 1,
                 fillOpacity: 0.8
             };
-        
+
+
+            var osmMarker = {
+              radius: 6,
+              fillColor: "#4f83cc",
+              color: "#000",
+              weight: 1,
+              opacity: 1,
+              fillOpacity: 0.8
+            };
+
+            var resultMarker = {
+              radius: 6,
+              fillColor: "#428e92",
+              color: "#000",
+              weight: 1,
+              opacity: 1,
+              fillOpacity: 0.8
+            };
+
             // load a tile layer (basemap)
             L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
             {
                 attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
             }).addTo(map);
-        
+
             // point layers here
 
             var layerGroup = L.layerGroup().addTo(map);
             var mapillaryBenchLayer = createLayer(mapillaryBenches);
-            var osmBenchLayer = createLayer(osmBenches);
-            var osmBenchResultLayer = createLayer(osmBenchesResult);
+            var osmBenchLayer = createLayer(osmBenches,"osm");
+            var osmBenchResultLayer = createLayer(osmBenchesResult,"result");
             var benchVisible = filterVisible(mapillaryBenches);
             var benchAdded = filterAdded(mapillaryBenches);
 
             var mapillaryBikeLayer =  createLayer(bikeVerification);
-            var osmBikeLayer = createLayer(osmBikes);
-            var osmBikeResultLayer = createLayer(OSMBikesResult);
+            var osmBikeLayer = createLayer(osmBikes,"osm");
+            var osmBikeResultLayer = createLayer(OSMBikesResult,"result");
             var bikeVisible = filterVisible(bikeVerification);
             var bikeAdded = filterAdded(bikeVerification);
 
             var mapillaryFireLayer =  createLayer(fireVerification);
-            var osmFireLayer = createLayer(osmFire);
-            var osmFireResultLayer = createLayer(FireResult);
+            var osmFireLayer = createLayer(osmFire,"osm");
+            var osmFireResultLayer = createLayer(FireResult,"result");
             var fireVisible = filterVisible(fireVerification);
             var fireAdded = filterAdded(fireVerification);
 
             var mapillaryWasteLayer =  createLayer(trashVerification);
-            var osmWasteLayer = createLayer(osmTrash);
-            var osmWasteResultLayer = createLayer(osmTrashResult);
+            var osmWasteLayer = createLayer(osmTrash,"osm");
+            var osmWasteResultLayer = createLayer(osmTrashResult,"result");
             var wasteVisible = filterVisible(trashVerification);
             var wasteAdded = filterAdded(trashVerification);
 
-            
-            function createLayer (data) {
-                var layer = L.geoJSON(data,{pointToLayer: function (feature, latlng) {return L.circleMarker(latlng, geojsonMarkerOptions);}})
+
+            function createLayer (data,type) {
+                var style = geojsonMarkerOptions;
+                if (type == "osm") {
+                  style = osmMarker;
+                } else if (type == "result") {
+                  style = resultMarker;
+                }
+                var layer = L.geoJSON(data,{pointToLayer: function (feature, latlng) {return L.circleMarker(latlng, style);}})
                 return layer;
             }
 
@@ -98,12 +123,12 @@
             function filterAdded(layer) {
                 var map = L.geoJSON(layer,{pointToLayer: function (feature, latlng)
                     {return L.circleMarker(latlng, styleMapillary(feature.properties.verification_Action));}})
-                return map; 
+                return map;
             }
 
             // code for changing legend
             map.on('baselayerchange', function(eventLayer) {
-                if (eventLayer.name == 'Visible/Not Visible') { 
+                if (eventLayer.name == 'Visible/Not Visible') {
                     map.removeControl(legend);
                     legend = createLegend('visible');
                     addLegend(legend);
@@ -117,7 +142,7 @@
                     addLegend(legend);
                 }
             });
-           
+
             var legend = createLegend();
             var control = L.control.layers(maps);
 
@@ -167,7 +192,7 @@
             }
 
             function styleMapillary(f) {
-               return { 
+               return {
                     radius: 6,
                     fillColor: filter(f),
                     color: "#000",
@@ -202,6 +227,10 @@
                         div.innerHTML = '<div id ="circle"></div> &nbspVisible <br> <div id ="circle2"></div> &nbspNot Visible'
                     } else if (type == 'added'){
                         div.innerHTML = '<div id ="circle"></div> &nbspAdded <br> <div id ="circle2"></div> &nbspNot Added'
+                    } else if (type == 'osm') {
+                        div.innerHTML =  '<div id ="circleosm"></div>&nbspObject'
+                    } else if (type == 'result') {
+                        div.innerHTML =  '<div id ="circleresult"></div>&nbspObject'
                     } else {
                         div.innerHTML =  '<div id ="circle"></div>&nbspObject'
                     }
@@ -215,7 +244,7 @@
                 map.removeControl(l);
                 l.addTo(map);
             }
-            
+
             function showButtons (type) {
                 document.getElementById("benches").style.display = "none";
                 document.getElementById("bikes").style.display = "none";
@@ -224,7 +253,7 @@
                 document.getElementById(type).style.display = "block";
             }
 
-            
+
 
         </script>
 
@@ -236,27 +265,27 @@
         </div>
 
         <div id="benches">
-            <button class="featurebutton" onclick="addLayer(osmBenchLayer)">OSM Benches</button>
+            <button class="featurebutton" onclick="addLayer(osmBenchLayer,'osm')">OSM Benches</button>
             <button class="featurebutton" onclick="addLayer(mapillaryBenchLayer,'mapillarybenches')">Mapillary Benches</button>
-            <button class="featurebutton" onclick="addLayer(osmBenchResultLayer)">OSM Benches + Mapillary</button>
+            <button class="featurebutton" onclick="addLayer(osmBenchResultLayer,'result')">OSM Benches + Mapillary</button>
         </div>
 
         <div id="bikes">
-            <button onclick="addLayer(osmBikeLayer)">OSM Bicycle Racks</button>
+            <button onclick="addLayer(osmBikeLayer,'osm')">OSM Bicycle Racks</button>
             <button onclick="addLayer(mapillaryBikeLayer,'mapillarybikes')">Mapillary Bicycle Racks</button>
-            <button onclick="addLayer(osmBikeResultLayer)">OSM Racks + Mapillary</button>
+            <button onclick="addLayer(osmBikeResultLayer,'result')">OSM Racks + Mapillary</button>
         </div>
 
         <div id="fire">
-            <button onclick="addLayer(osmFireLayer)">OSM Fire Hydrants</button>
+            <button onclick="addLayer(osmFireLayer,'osm')">OSM Fire Hydrants</button>
             <button onclick="addLayer(mapillaryFireLayer,'mapillaryfire')">Mapillary Fire Hydrants</button>
-            <button onclick="addLayer(osmFireResultLayer)">OSM Hydrants + Mapillary</button>
+            <button onclick="addLayer(osmFireResultLayer,'result')">OSM Hydrants + Mapillary</button>
         </div>
 
         <div id="waste">
-            <button onclick="addLayer(osmWasteLayer)">OSM Wastebaskets</button>
+            <button onclick="addLayer(osmWasteLayer,'osm')">OSM Wastebaskets</button>
             <button onclick="addLayer(mapillaryWasteLayer,'mapillarywaste')">Mapillary Wastebaskets</button>
-            <button onclick="addLayer(osmWasteResultLayer)">OSM Waste + Mapillary</button>
+            <button onclick="addLayer(osmWasteResultLayer,'result')">OSM Waste + Mapillary</button>
         </div>
 
 

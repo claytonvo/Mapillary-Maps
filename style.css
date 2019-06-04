@@ -136,7 +136,25 @@ button {
     float:left;
   }
 
+#circleosm  {
+    width: 14px;
+    height: 14px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius:7px;
+    border-radius: 7px;
+    background: #4f83cc;
+    float:left;
+  }
 
+  #circleresult  {
+      width: 14px;
+      height: 14px;
+      -webkit-border-radius: 7px;
+      -moz-border-radius:7px;
+      border-radius: 7px;
+      background: #428e92;
+      float:left;
+    }
 
 .legend {
     line-height: 18px;
@@ -170,7 +188,7 @@ button {
     background-color: #555;
     overflow: auto;
   }
-  
+
   /* Navbar links */
   .navbar a {
     float: left;
@@ -180,21 +198,21 @@ button {
     text-decoration: none;
     font-size: 20px;
   }
-  
+
   /* Navbar links on mouse-over */
   .navbar a:hover {
     background-color: #000;
   }
-  
+
   /* Current/active navbar link */
   .active {
     background-color: #4CAF50;
   }
-  
+
   /* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
   @media screen and (max-width: 500px) {
     .navbar a {
       float: none;
       display: block;
     }
-  } 
+  }
