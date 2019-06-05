@@ -145,6 +145,7 @@
         <button id = "cumulativebutton" class = "mainbutton">Cumulative</button>
         <button id = "benchbutton" class = "mainbutton">Benches</button>
         <button id = "bikebutton" class = "mainbutton" >Bicycle Racks</button>
+        <button id = "crosswalkbutton" class = "mainbutton">Crosswalks</button>
         <button id = "firebutton" class = "mainbutton" >Fire Hydrants</button>
         <button id = "wastebutton" class = "mainbutton" >Wastebaskets</button>
     </div>
@@ -180,6 +181,11 @@
             visibleChart.update();
         });
 
+        $("#crosswalkbutton").on("click", function() {
+            visibleChart.options.title.text = 'Crosswalk Visibility';
+            visibleChart.data.datasets[0].data = [179,89];
+            visibleChart.update();
+        });
     </script>
 
     <script>
@@ -210,6 +216,12 @@
         $("#cumulativebutton").on("click", function() {
             existChart.options.title.text = 'Cumulative OSM Status';
             existChart.data.datasets[0].data = [197,545];
+            existChart.update();
+        });
+
+        $("#crosswalkbutton").on("click", function() {
+            existChart.options.title.text = 'Crosswalk OSM Status';
+            existChart.data.datasets[0].data = [50,147];
             existChart.update();
         });
     </script>
@@ -245,9 +257,14 @@
             addedChart.update();
         });
 
+        $("#crosswalkbutton").on("click", function() {
+            addedChart.options.title.text = 'Crosswalk Additions to OSM';
+            addedChart.data.datasets[0].data = [109,123];
+            addedChart.update();
+        });
     </script>
 
-<script>
+    <script>
         $("#benchbutton").on("click", function() {
             offsetChart.options.title.text = 'Bench Offset Distribution';
             offsetChart.data.datasets[0].data = [53,114,50,24];
@@ -278,10 +295,14 @@
             offsetChart.update();
         });
 
-
+        $("#crosswalkbutton").on("click", function() {
+            offsetChart.options.title.text = 'Crosswalk Offset Distribution';
+            offsetChart.data.datasets[0].data = [47,90,29,10];
+            offsetChart.update();
+        });
     </script>
 
-<script>
+    <script>
     $("#benchbutton").on("click", function() {
         duplicateChart.options.title.text = 'Bench Duplicates';
         duplicateChart.data.datasets[0].data = [47, 199, 421];
@@ -312,7 +333,12 @@
         duplicateChart.update();
     });
 
+    $("#crosswalkbutton").on("click", function() {
+        duplicateChart.options.title.text = 'Crosswalk Duplicates';
+        duplicateChart.data.datasets[0].data = [41, 180, 44];
+        duplicateChart.update();
+    });
 
-</script>
+    </script>
     </body>
 </html>
