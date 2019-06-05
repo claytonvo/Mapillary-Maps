@@ -43,7 +43,7 @@
                 datasets: [{
                     label: "Bench Visibility",
                     backgroundColor: ["#6ba975", "#de425b"],
-                    data: [288,460]
+                    data: [1193,915]
                 }]
                 },
                 options: {
@@ -65,7 +65,7 @@
                 datasets: [{
                     label: "Bench Visibility",
                     backgroundColor: ["#6ba975", "#de425b"],
-                    data: [158,79]
+                    data: [416,747]
                 }]
                 },
                 options: {
@@ -87,7 +87,7 @@
                 datasets: [{
                     label: "Bench Visibility",
                     backgroundColor: ["#6ba975", "#de425b"],
-                    data: [141,597]
+                    data: [452,1610]
                 }]
                 },
                 options: {
@@ -107,7 +107,7 @@
                 datasets: [{
                     label: "Bench Duplicates",
                     backgroundColor: ["#6ba975", "#de425b", "#808080"],
-                    data: [47, 199, 421]
+                    data: [236, 980, 808]
                 }]
                 },
                 options: {
@@ -126,7 +126,7 @@
                 datasets: [{
                     label: "# of Offset Points",
                     backgroundColor: ["#6ba975","#6ba975","#6ba975","#6ba975"],
-                    data: [197,545,149,46]
+                    data: [244,635,178,56]
                 }]
                 },
                 options: {
@@ -177,7 +177,7 @@
 
         $("#cumulativebutton").on("click", function() {
             visibleChart.options.title.text = 'Cumulative Visibility';
-            visibleChart.data.datasets[0].data = [197,545];
+            visibleChart.data.datasets[0].data = [1193,915];
             visibleChart.update();
         });
 
@@ -215,7 +215,7 @@
 
         $("#cumulativebutton").on("click", function() {
             existChart.options.title.text = 'Cumulative OSM Status';
-            existChart.data.datasets[0].data = [197,545];
+            existChart.data.datasets[0].data = [416,747];
             existChart.update();
         });
 
@@ -253,7 +253,7 @@
 
         $("#cumulativebutton").on("click", function() {
             addedChart.options.title.text = 'Cumulative Additions to OSM';
-            addedChart.data.datasets[0].data = [197,545];
+            addedChart.data.datasets[0].data = [452,1610];
             addedChart.update();
         });
 
@@ -291,7 +291,7 @@
 
         $("#cumulativebutton").on("click", function() {
             offsetChart.options.title.text = 'Cumulative Offset Distribution';
-            offsetChart.data.datasets[0].data = [197,545,149,46];
+            offsetChart.data.datasets[0].data = [244,635,178,56];
             offsetChart.update();
         });
 
@@ -329,7 +329,7 @@
 
     $("#cumulativebutton").on("click", function() {
         duplicateChart.options.title.text = 'Cumulative Duplicates';
-        duplicateChart.data.datasets[0].data = [195, 800, 764];
+        duplicateChart.data.datasets[0].data = [236, 980, 808];
         duplicateChart.update();
     });
 
