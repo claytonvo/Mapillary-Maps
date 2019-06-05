@@ -20,6 +20,8 @@
         <script src="osmTrashResult.geojson"></script>
         <script src="osmTrash.geojson"></script>
         <script src="trashVerification.geojson"></script>
+        <script src="osmCrosswalks.geojson"></script>
+        <script src="osmCrosswalksResult.geojson"></script>
         <script src="https://kit.fontawesome.com/ec90fb9154.js"></script>
     </head>
 
@@ -52,7 +54,7 @@
 
             var osmMarker = {
               radius: 6,
-              fillColor: "#4f83cc",
+              fillColor: "#4ABDAC",
               color: "#000",
               weight: 1,
               opacity: 1,
@@ -61,7 +63,7 @@
 
             var resultMarker = {
               radius: 6,
-              fillColor: "#428e92",
+              fillColor: "#F7B733",
               color: "#000",
               weight: 1,
               opacity: 1,
@@ -100,6 +102,12 @@
             var osmWasteResultLayer = createLayer(osmTrashResult,"result");
             var wasteVisible = filterVisible(trashVerification);
             var wasteAdded = filterAdded(trashVerification);
+
+         //   var mapillaryCrossLayer =  createLayer(crosswalkVerification);
+            var osmCrossLayer = createLayer(osmCrosswalks,"osm");
+            var osmCrossResultLayer = createLayer(osmCrosswalksResult,"result");
+          //  var crossVisible = filterVisible(crosswalkVerification);
+          //  var crossAdded = filterAdded(crosswalkVerification);
 
 
             function createLayer (data,type) {
@@ -250,6 +258,7 @@
                 document.getElementById("bikes").style.display = "none";
                 document.getElementById("fire").style.display = "none";
                 document.getElementById("waste").style.display = "none";
+                document.getElementById("crosswalk").style.display = "none";
                 document.getElementById(type).style.display = "block";
             }
 
@@ -262,6 +271,7 @@
             <button id = "bikebutton" class = "mainbutton" onclick="showButtons('bikes')">Bicycle Racks</button>
             <button id = "firebutton" class = "mainbutton" onclick="showButtons('fire')">Fire Hydrants</button>
             <button id = "wastebutton" class = "mainbutton" onclick="showButtons('waste')">Wastebaskets</button>
+            <button id = "crossbutton" class = "mainbutton" onclick="showButtons('crosswalk')">Crosswalks</button>
         </div>
 
         <div id="benches">
@@ -286,6 +296,12 @@
             <button onclick="addLayer(osmWasteLayer,'osm')">OSM Wastebaskets</button>
             <button onclick="addLayer(mapillaryWasteLayer,'mapillarywaste')">Mapillary Wastebaskets</button>
             <button onclick="addLayer(osmWasteResultLayer,'result')">OSM Waste + Mapillary</button>
+        </div>
+
+        <div id="crosswalk">
+            <button onclick="addLayer(osmCrossLayer,'osm')">OSM Crosswalks</button>
+            <button onclick="addLayer(mapillaryWasteLayer,'mapillarywaste')">Mapillary Crosswalks</button>
+            <button onclick="addLayer(osmCrossResultLayer,'result')">OSM Crossings + Mapillary</button>
         </div>
 
 

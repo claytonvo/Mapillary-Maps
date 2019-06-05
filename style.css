@@ -46,6 +46,12 @@ html, body { height: 100% }
     display: none;
 }
 
+#crosswalk {
+  text-align: center;
+  padding: 25px;
+  display: none;
+}
+
 h1 {
     color: rgb(33, 43, 54);
     font-family: "Source Sans Pro", sans-serif;
@@ -142,7 +148,7 @@ button {
     -webkit-border-radius: 7px;
     -moz-border-radius:7px;
     border-radius: 7px;
-    background: #4f83cc;
+    background: #4ABDAC;
     float:left;
   }
 
@@ -152,7 +158,7 @@ button {
       -webkit-border-radius: 7px;
       -moz-border-radius:7px;
       border-radius: 7px;
-      background: #428e92;
+      background: #F7B733;
       float:left;
     }
 
