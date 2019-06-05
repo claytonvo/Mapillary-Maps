@@ -22,6 +22,7 @@
         <script src="trashVerification.geojson"></script>
         <script src="osmCrosswalks.geojson"></script>
         <script src="osmCrosswalksResult.geojson"></script>
+        <script src="osmCrosswalkVerification.geojson"></script>
         <script src="https://kit.fontawesome.com/ec90fb9154.js"></script>
     </head>
 
@@ -103,11 +104,11 @@
             var wasteVisible = filterVisible(trashVerification);
             var wasteAdded = filterAdded(trashVerification);
 
-            var mapillaryCrossLayer =  createLayer(crosswalkVerification);
+            var mapillaryCrossLayer =  createLayer(osmCrosswalkVerification);
             var osmCrossLayer = createLayer(osmCrosswalks,"osm");
             var osmCrossResultLayer = createLayer(osmCrosswalksResult,"result");
-            var crossVisible = filterVisible(crosswalkVerification);
-            var crossAdded = filterAdded(crosswalkVerification);
+            var crossVisible = filterVisible(osmCrosswalkVerification);
+            var crossAdded = filterAdded(osmCrosswalkVerification);
 
 
             function createLayer (data,type) {
