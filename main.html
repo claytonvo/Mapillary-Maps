@@ -103,11 +103,11 @@
             var wasteVisible = filterVisible(trashVerification);
             var wasteAdded = filterAdded(trashVerification);
 
-         //   var mapillaryCrossLayer =  createLayer(crosswalkVerification);
+            var mapillaryCrossLayer =  createLayer(crosswalkVerification);
             var osmCrossLayer = createLayer(osmCrosswalks,"osm");
             var osmCrossResultLayer = createLayer(osmCrosswalksResult,"result");
-          //  var crossVisible = filterVisible(crosswalkVerification);
-          //  var crossAdded = filterAdded(crosswalkVerification);
+            var crossVisible = filterVisible(crosswalkVerification);
+            var crossAdded = filterAdded(crosswalkVerification);
 
 
             function createLayer (data,type) {
@@ -186,6 +186,8 @@
                     control = L.control.layers(createControl(mapillaryFireLayer,fireVisible,fireAdded)).addTo(map);
                 } else if (type =='mapillarywaste') {
                     control = L.control.layers(createControl(mapillaryWasteLayer,wasteVisible,wasteAdded)).addTo(map);
+                } else if (type =='mapillarycrossing') {
+                    control = L.control.layers(createControl(mapillaryCrossLayer,crossVisible,crossAdded)).addTo(map);
                 }
             }
 
@@ -300,7 +302,7 @@
 
         <div id="crosswalk">
             <button onclick="addLayer(osmCrossLayer,'osm')">OSM Crosswalks</button>
-            <button onclick="addLayer(mapillaryWasteLayer,'mapillarywaste')">Mapillary Crosswalks</button>
+            <button onclick="addLayer(mapillaryCrossLayer,'mapillarycrossing')">Mapillary Crosswalks</button>
             <button onclick="addLayer(osmCrossResultLayer,'result')">OSM Crossings + Mapillary</button>
         </div>
 
