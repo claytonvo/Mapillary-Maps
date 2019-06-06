@@ -125,7 +125,7 @@
             function createResult(layer) {
                 var map = L.geoJSON(layer,{pointToLayer: function (feature, latlng)
                     {return L.circleMarker(latlng, styleResult(feature.properties.new));}})
-                return map; 
+                return map;
             }
 
             function filterVisible(layer) {
@@ -211,7 +211,7 @@
                 if (d == 0) {
                     return '#5b9fff';
                 } else {
-                    return '#45ad3a';
+                    return '#fff172';
                 }
             }
 
@@ -267,7 +267,7 @@
                     } else if (type == 'osm') {
                         div.innerHTML =  '<div id ="circleosm"></div>&nbspObject'
                     } else if (type == 'result') {
-                        div.innerHTML =  '<div id ="circleresult"></div>&nbspObject'
+                        div.innerHTML =  '<div id ="circleresult"></div>&nbspAdded Point'
                     } else {
                         div.innerHTML =  '<div id ="circle"></div>&nbspObject'
                     }
