@@ -45,7 +45,7 @@
             // styling for points
             var geojsonMarkerOptions = {
                 radius: 6,
-                fillColor: "#0DCB68",
+                fillColor: "#45ad3a",
                 color: "#000",
                 weight: 1,
                 opacity: 1,
@@ -55,7 +55,7 @@
 
             var osmMarker = {
               radius: 6,
-              fillColor: "#4ABDAC",
+              fillColor: "#5b9fff",
               color: "#000",
               weight: 1,
               opacity: 1,
@@ -64,7 +64,7 @@
 
             var resultMarker = {
               radius: 6,
-              fillColor: "#F7B733",
+              fillColor: "#72a8ff",
               color: "#000",
               weight: 1,
               opacity: 1,
@@ -82,31 +82,31 @@
             var layerGroup = L.layerGroup().addTo(map);
             var mapillaryBenchLayer = createLayer(mapillaryBenches);
             var osmBenchLayer = createLayer(osmBenches,"osm");
-            var osmBenchResultLayer = createLayer(osmBenchesResult,"result");
+            var osmBenchResultLayer = createResult(osmBenchesResult);
             var benchVisible = filterVisible(mapillaryBenches);
             var benchAdded = filterAdded(mapillaryBenches);
 
             var mapillaryBikeLayer =  createLayer(bikeVerification);
             var osmBikeLayer = createLayer(osmBikes,"osm");
-            var osmBikeResultLayer = createLayer(OSMBikesResult,"result");
+            var osmBikeResultLayer = createResult(OSMBikesResult);
             var bikeVisible = filterVisible(bikeVerification);
             var bikeAdded = filterAdded(bikeVerification);
 
             var mapillaryFireLayer =  createLayer(fireVerification);
             var osmFireLayer = createLayer(osmFire,"osm");
-            var osmFireResultLayer = createLayer(FireResult,"result");
+            var osmFireResultLayer = createResult(FireResult);
             var fireVisible = filterVisible(fireVerification);
             var fireAdded = filterAdded(fireVerification);
 
             var mapillaryWasteLayer =  createLayer(trashVerification);
             var osmWasteLayer = createLayer(osmTrash,"osm");
-            var osmWasteResultLayer = createLayer(osmTrashResult,"result");
+            var osmWasteResultLayer = createResult(osmTrashResult);
             var wasteVisible = filterVisible(trashVerification);
             var wasteAdded = filterAdded(trashVerification);
 
             var mapillaryCrossLayer =  createLayer(osmCrosswalkVerification);
             var osmCrossLayer = createLayer(osmCrosswalks,"osm");
-            var osmCrossResultLayer = createLayer(osmCrosswalksResult,"result");
+            var osmCrossResultLayer = createResult(osmCrosswalksResult);
             var crossVisible = filterVisible(osmCrosswalkVerification);
             var crossAdded = filterAdded(osmCrosswalkVerification);
 
@@ -122,6 +122,11 @@
                 return layer;
             }
 
+            function createResult(layer) {
+                var map = L.geoJSON(layer,{pointToLayer: function (feature, latlng)
+                    {return L.circleMarker(latlng, styleResult(feature.properties.new));}})
+                return map; 
+            }
 
             function filterVisible(layer) {
                 var map = L.geoJSON(layer,{pointToLayer: function (feature, latlng)
@@ -200,6 +205,25 @@
                 } else {
                     return '#0DCB68';
                 }
+            }
+
+            function filternew(d) {
+                if (d == 0) {
+                    return '#5b9fff';
+                } else {
+                    return '#45ad3a';
+                }
+            }
+
+            function styleResult(f) {
+                return {
+                    radius: 6,
+                    fillColor: filternew(f),
+                    color: "#000",
+                    weight: 1,
+                    opacity: 1,
+                    fillOpacity: 0.8
+               }
             }
 
             function styleMapillary(f) {
