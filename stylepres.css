@@ -1,0 +1,224 @@
+* {
+    font-family:'Source Sans Pro', sans-serif
+}
+
+html, body { height: 100% }
+
+#map {
+    height: 100%;
+    width: 100%;
+    margin: auto;
+}
+
+#mainbuttons {
+    text-align: center;
+}
+
+.mainbutton {
+    font-size: 12px;
+    font-weight: 100;
+    margin-top: 10px;
+    width: 120px;
+    height: 30px;
+    background-color: #333;
+}
+
+#benches {
+    text-align: center;
+    padding: 25px;
+}
+
+#bikes {
+    text-align: center;
+    padding: 25px;
+    display: none;
+}
+
+#fire {
+    text-align: center;
+    padding: 25px;
+    display: none;
+}
+
+#waste {
+    text-align: center;
+    padding: 25px;
+    display: none;
+}
+
+#crosswalk {
+  text-align: center;
+  padding: 25px;
+  display: none;
+}
+
+h1 {
+    color: rgb(33, 43, 54);
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 45px;
+    margin-bottom: 10px;
+    margin-left: 141px;
+    margin-right: 141px;
+    margin-top: 10px;
+    max-width: 2000px;
+    text-align: center;
+}
+
+button {
+    align-items: center;
+    background-color: rgb(5, 203, 99);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-image-outset: 0;
+    border-image-repeat: stretch;
+    border-image-slice: 100%;
+    border-image-source: none;
+    border-image-width: 1;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-right-color: rgba(0, 0, 0, 0);
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-top-color: rgba(0, 0, 0, 0);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-top-style: solid;
+    border-top-width: 1px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: inline-flex;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    height: 60px;
+    justify-content: center;
+    line-height: 18px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 16px;
+    margin-top: 0px;
+    padding-bottom: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 8px;
+    text-align: center;
+    text-decoration: none;
+    text-decoration-color: rgb(255, 255, 255);
+    text-decoration-line: none;
+    text-decoration-style: solid;
+    transition-delay: 0s;
+    transition-duration: 0.2s;
+    transition-property: all;
+    transition-timing-function: ease;
+    vertical-align: middle;
+    width: 150px;
+}
+
+#circle {
+    width: 14px;
+    height: 14px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius:7px;
+    border-radius: 7px;
+    background: #0DCB68;
+    float:left;
+  }
+
+#circle2  {
+    width: 14px;
+    height: 14px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius:7px;
+    border-radius: 7px;
+    background: #e8410d;
+    float:left;
+  }
+
+#circleosm  {
+    width: 14px;
+    height: 14px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius:7px;
+    border-radius: 7px;
+    background: #72a8ff;
+    float:left;
+  }
+
+  #circleresult  {
+      width: 14px;
+      height: 14px;
+      -webkit-border-radius: 7px;
+      -moz-border-radius:7px;
+      border-radius: 7px;
+      background: #fff172;
+      float:left;
+    }
+
+.legend {
+    line-height: 18px;
+    color: #555;
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+
+#bar-chart {
+    display: none;
+}
+
+#flex {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+#center {
+    text-align: center;
+}
+
+ /* Style the navigation bar */
+ .navbar {
+    width: 100%;
+    background-color: #555;
+    overflow: auto;
+  }
+
+  /* Navbar links */
+  .navbar a {
+    float: left;
+    text-align: center;
+    padding: 12px;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+  }
+
+  /* Navbar links on mouse-over */
+  .navbar a:hover {
+    background-color: #000;
+  }
+
+  /* Current/active navbar link */
+  .active {
+    background-color: #4CAF50;
+  }
+
+  /* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
+  @media screen and (max-width: 500px) {
+    .navbar a {
+      float: none;
+      display: block;
+    }
+  }
