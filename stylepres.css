@@ -222,3 +222,7 @@ button {
       display: block;
     }
   }
+
+  .leaflet-interactive {
+    cursor: url("circle.png"),auto;
+  }
